@@ -1,0 +1,30 @@
+plugins {
+    id 'org.springframework.boot' version '2.1.7.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'java'
+}
+
+group = 'com.zzkoro'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    runtimeOnly 'org.postgresql:postgresql'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+}
+
+bootRun {
+    description "bootRun started!!"
+    // pass command line options from gradle to bootRun
+    // usage: gradlew bootRun "-Dspring.profiles.active=local,protractor"
+    if (System.properties.containsKey('spring.profiles.active')) {
+        systemProperty "spring.profiles.active", System.properties['spring.profiles.active']
+    }
+}
+
